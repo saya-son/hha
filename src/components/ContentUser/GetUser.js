@@ -1,9 +1,13 @@
+// GetUser.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Pagination from '../../components/Pagination';  // Import component phân trang
 
 export default function GetUser() {
     const [users, setUsers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const pageSize = 7; // Số lượng người dùng mỗi trang
     const navigate = useNavigate();
 
     // Hàm lấy danh sách người dùng
@@ -29,6 +33,18 @@ export default function GetUser() {
             console.error('Lỗi khi xóa người dùng:', error.response?.data || error.message);
             alert('Không thể xóa người dùng!');
         }
+    };
+
+    // Tính toán người dùng cho trang hiện tại
+    const startIndex = (currentPage - 1) * pageSize;
+    const currentUsers = users.slice(startIndex, startIndex + pageSize);
+    
+    // Tính tổng số trang
+    const totalPages = Math.ceil(users.length / pageSize);
+
+    // Hàm thay đổi trang
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
     };
 
     // Lấy danh sách người dùng khi component được render
@@ -61,7 +77,7 @@ export default function GetUser() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user, index) => (
+                    {currentUsers.map((user, index) => (
                         <tr key={index}>
                             <td>{user.userId}</td>
                             <td>{user.username}</td>
@@ -80,6 +96,13 @@ export default function GetUser() {
                     ))}
                 </tbody>
             </table>
+
+            {/* Phân trang */}
+            <Pagination
+                totalPages={totalPages}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+            />
         </div>
     );
 }

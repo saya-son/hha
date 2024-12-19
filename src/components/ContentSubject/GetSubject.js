@@ -31,6 +31,11 @@ export default function GetSubject() {
         }
     };
 
+    // Hàm chuyển hướng đến trang /public/subject/chapters với subjectId
+    const goToChapters = (subjectId) => {
+        navigate(`/public/subjects/chapters/${subjectId}`);
+    };
+
     // Render danh sách môn học
     const elementSubject = subjects.map((item) => {
         return (
@@ -44,7 +49,14 @@ export default function GetSubject() {
                         className="btn btn-danger mx-1"
                         onClick={() => deleteSubject(item.subjectId)}
                     >
-                        Delete
+                        Xóa
+                    </button>
+                    {/* Nút "Edit" chuyển hướng đến trang chapters với subjectId */}
+                    <button
+                        className="btn btn-warning mx-1"
+                        onClick={() => goToChapters(item.subjectId)}
+                    >
+                        Thêm chương
                     </button>
                 </td>
             </tr>

@@ -19,7 +19,7 @@ export default function AddSubject() {
                 name: '',
                 description: ''
             });
-            navigate('/subjects'); // Quay về trang danh sách môn học sau khi thêm
+            navigate('/public/subjects'); // Quay về trang danh sách môn học sau khi thêm
         } catch (error) {
             console.error('Lỗi khi thêm môn học: ', error);
             alert('Không thể thêm môn học!');
@@ -50,7 +50,7 @@ export default function AddSubject() {
                     />
                 </div>
                 <button type="submit" className="btn btn-success">Lưu</button>
-                <button type="button" className="btn btn-secondary mx-2" onClick={() => navigate('/subjects')}>Hủy</button>
+                <button type="button" className="btn btn-secondary mx-2" onClick={() => navigate('/public/subjects')}>Hủy</button>
             </form>
         </div>
     );

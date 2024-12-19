@@ -20,7 +20,7 @@ export default function Sidebar() {
                 <BiTask className='icon'/>
                 Quản lý user
             </NavLink>
-            <NavLink to = '/exams' className='item'>
+            <NavLink to = '/public/admin/exams' className='item'>
                 <BiSolidReport className='icon'/>
                 Quản lý bài thi
             </NavLink>

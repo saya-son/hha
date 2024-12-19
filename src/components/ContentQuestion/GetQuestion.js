@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axiosGetQuestion from '../../Api/userApi';
-import axios from 'axios';
 
 export default function GetQuestion() {
     const [questions, setQuestions] = useState([]);
@@ -22,7 +21,7 @@ export default function GetQuestion() {
         const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa câu hỏi này?");
         if (confirmDelete) {
             try {
-                await axios.delete(`/admin/questions/${questionId}`);
+                await axiosGetQuestion.delete(`/public/admin/questions/${questionId}`);
                 alert("Xóa câu hỏi thành công!");
                 setQuestions(questions.filter((question) => question.questionId !== questionId));
             } catch (error) {

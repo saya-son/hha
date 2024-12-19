@@ -20,7 +20,7 @@ function Login() {
         // Lưu accessToken vào localStorage
         localStorage.setItem('token', data.accessToken);
         alert('Đăng nhập thành công!');
-        navigate('/admin/users'); // Điều hướng đến trang quản lý user
+        navigate('/home'); // Điều hướng đến trang quản lý user
       } else {
         alert(data.message || 'Đăng nhập thất bại!');
       }
