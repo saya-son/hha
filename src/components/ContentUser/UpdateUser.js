@@ -24,7 +24,7 @@ export default function UpdateUser() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const updatedUser = {
-            fullname: fullName,
+            fullName: fullName,
             email: email,
             id: id,
         };

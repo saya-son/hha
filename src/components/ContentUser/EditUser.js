@@ -39,6 +39,7 @@ export default function GetQuestion() {
             </td>
         </tr>
     ))
+    console.log(elementQuestion);
 
     return (
         <div>

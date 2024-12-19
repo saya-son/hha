@@ -1,54 +1,64 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axiosGetExam from '../../Api/userApi';
+
 export default function GetExam() {
-    const [exams, setExams] = useState([]);
+    const [exams, setExams] = useState([]); // Lưu danh sách bài thi
+    const [loading, setLoading] = useState(true); // Trạng thái tải dữ liệu
+
     useEffect(() => {
         getAllExams();
-        console.log('Exams: ', exams);
-    })
-    // Hàm call data from api
-    const getAllExams = async() =>{
-        // Gọi api lấy dữ liệu
-        const rep = await axiosGetExam.get("exams");
-        console.log('rep: ', rep.data);
-        setExams(rep.data)
-    }
-    // render data to element
-    const elementExams = exams.map((item, index) => {
-        return (
-            <>
-                <tr key={index}>
-                    <td>{item.examId}</td>
-                    <td>{item.examName}</td>
-                    <td>{item.level}</td>
-                    <td>{item.time}</td>
-                    <td>{item.total}</td>
-                    <td>
-                        <a href='/#' className='btn btn-success mx-2'>Edit</a>
-                        <a href='/#' className='btn btn-danger mx-1'>Delete</a>
-                    </td>
-                </tr>
-            </>
-        )
-    })
-  return (
-    <div>
-        <h2>Quản lý bài thi</h2>
-        <table className=' table table-bordered'>
-            <thead>
-                <tr>
-                    <th>Mã đề thi</th>
-                    <th>Tên đề thi</th>
-                    <th>Mức độ</th>
-                    <th>Thời gian</th>
-                    <th>Câu hỏi</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                {elementExams}
-            </tbody>
-        </table>
-    </div>
-  )
+    }, []); // Thêm dependency [] để tránh gọi API lặp lại.
+
+    const getAllExams = async () => {
+        try {
+            // Gọi API lấy dữ liệu bài thi
+            const response = await axiosGetExam.get("/admin/exams");
+            console.log('Response: ', response.data);
+            setExams(response.data); // Lưu dữ liệu vào state
+        } catch (error) {
+            console.error('Error fetching exams: ', error);
+        } finally {
+            setLoading(false); // Đặt trạng thái tải dữ liệu thành false
+        }
+    };
+
+    // Render dữ liệu ra bảng
+    const elementExams = exams.map((item, index) => (
+        <tr key={index}>
+            <td>{item.examDto.subjectId}</td>
+            <td>{item.examDto.title}</td>
+            <td>{item.examDto.description}</td>
+            <td>{item.examDto.duration} phút</td>
+            <td>{item.numberOfQuestion}</td>
+            <td>
+                <a href='/#' className='btn btn-success mx-2'>Edit</a>
+                <a href='/#' className='btn btn-danger mx-1'>Delete</a>
+            </td>
+        </tr>
+    ));
+
+    return (
+        <div>
+            <h2>Quản lý bài thi</h2>
+            {loading ? (
+                <p>Đang tải dữ liệu...</p>
+            ) : (
+                <table className='table table-bordered'>
+                    <thead>
+                        <tr>
+                            <th>Mã môn học</th>
+                            <th>Tên bài thi</th>
+                            <th>Mô tả</th>
+                            <th>Thời gian</th>
+                            <th>Số câu hỏi</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {elementExams}
+                    </tbody>
+                </table>
+            )}
+        </div>
+    );
 }

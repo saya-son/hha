@@ -1,6 +1,6 @@
-import React from 'react'
-import {BiHome, BiUser, BiMessage, BiSolidReport, BiStats, BiTask, BiLogOut} from 'react-icons/bi';
-import { NavLink, Route, Routes, Navigate} from 'react-router-dom';
+import React from 'react';
+import { BiHome, BiLogOut, BiMessage, BiSolidReport, BiStats, BiTask, BiUser } from 'react-icons/bi';
+import { NavLink } from 'react-router-dom';
 import '../styles/sidebar.css';
 
 export default function Sidebar() {
@@ -16,7 +16,7 @@ export default function Sidebar() {
                 <BiHome className='icon'/>
                 Home
             </NavLink>
-            <NavLink to = '/users' className='item'>
+            <NavLink to = '/admin/users' className='item'>
                 <BiTask className='icon'/>
                 Quản lý user
             </NavLink>
@@ -24,11 +24,15 @@ export default function Sidebar() {
                 <BiSolidReport className='icon'/>
                 Quản lý bài thi
             </NavLink>
-            <NavLink to = '/subjects' className='item'>
+            <NavLink to = '/public/subjects' className='item'>
                 <BiStats className='icon'/>
                 Quản lý môn học
             </NavLink>
-            <NavLink to ='/questions' className='item'>
+            <NavLink to ='/public/subject/chapters' className='item'>
+                <BiMessage className='icon'/>
+                Quản lý chương
+            </NavLink>
+            <NavLink to ='/public/chapter/questions' className='item'>
                 <BiMessage className='icon'/>
                 Quản lý câu hỏi
             </NavLink>

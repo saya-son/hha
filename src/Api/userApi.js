@@ -1,4 +1,10 @@
 import axios from 'axios';
-export default axios.create({
-    baseURL:'https://674e9a10635bad45618f2e7c.mockapi.io/api/user/'
-})
+
+const userApi = axios.create({
+  baseURL: 'http://localhost:8080', // URL của backend
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+export default userApi;
